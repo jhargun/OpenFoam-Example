@@ -1,0 +1,93 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+|*---------------------------------------------------------------------------*|
+|  File created by CFD support s.r.o., Mon Aug 17 06:22:22 2015               |
+|                    http://www.cdfsupport.com                                |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.3;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         steadyState;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+}
+
+divSchemes
+{
+    div(phi,U)   			bounded Gauss upwind;
+    div(phi,e)   			bounded  Gauss upwind;
+    div(phi,Ekp)    			bounded  Gauss upwind;
+    div(phi,k)      			bounded  Gauss upwind;
+    div(phi,omega) 			bounded  Gauss upwind;
+    div(phi,nuTilda)  			bounded  Gauss upwind;
+    div(phi,epsilon)  			bounded  Gauss upwind;
+    div(phi,R)  			bounded  Gauss upwind;
+    div(phi,f)  			bounded  Gauss upwind;
+    div(phi,v2)  			bounded  Gauss upwind;
+    div(phi,kt)  			bounded  Gauss upwind;
+    div(phi,kl)  			bounded  Gauss upwind;
+    div(R) 					Gauss linear;
+    div(nonlinearStress) 			Gauss linear;
+    div((nuEff*dev2(T(grad(U))))) 		Gauss linear;
+    div((muEff*dev2(T(grad(U))))) 		Gauss linear;
+    div((thermo:mu*dev2(T(grad(U))))) 		Gauss linear;
+    div((rho*R)) 				Gauss linear;
+    div((nu*dev(T(grad(U)))))			Gauss linear;
+//    div(phi,nuTilda) bounded Gauss linearUpwind grad(nuTilda);
+    div(((rho*nuEff)*dev2(T(grad(U))))) 	Gauss linear;
+    div(div(phi,U))				Gauss linear;
+}
+
+laplacianSchemes
+{
+    default         			Gauss linear corrected;
+    
+    laplacian(nuEff,U) 			Gauss linear corrected;
+    laplacian(DnuTildaEff,nuTilda) 	Gauss linear corrected;
+    laplacian(1,p)  			Gauss linear corrected;
+    laplacian(muEff,U) 			Gauss linear corrected;
+    laplacian(alphaEff,e) 		Gauss linear corrected;
+    laplacian((rho*(1|A(U))),p) 	Gauss linear corrected;
+    laplacian(DepsilonEff,epsilon) 	Gauss linear corrected;
+    laplacian(DkEff,k) 			Gauss linear corrected;
+    laplacian(DREff,R) 			Gauss linear corrected;
+
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+fluxRequired
+{
+    default         no;
+    p               ;
+}
+wallDist
+{
+    method meshWave;
+}
+
+// ************************************************************************* //

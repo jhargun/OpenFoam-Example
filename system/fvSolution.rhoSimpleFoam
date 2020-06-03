@@ -1,0 +1,107 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+|*---------------------------------------------------------------------------*|
+|  File created by CFD support s.r.o., Mon Aug 17 06:22:22 2015               |
+|                    http://www.cdfsupport.com                                |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.3;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution.rhoSimpleFoam;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    p
+    {
+        solver          GAMG;
+        tolerance       1e-7;
+        relTol          0.01;
+        smoother        GaussSeidel;
+        cacheAgglomeration off;
+        nCellsInCoarsestLevel 20;
+        agglomerator    faceAreaPair;
+        mergeLevels     1;
+	//maxIter	         50;
+    }
+
+    Phi
+    {
+        $p;
+    }
+
+
+    pFinal
+    {
+        $p;
+        tolerance       1e-06;
+        relTol          0;
+    }
+
+    "(k|omega|epsilon|nuTilda|U|R|v2|f|kt|kl|e)"    
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        nSweeps         1;
+        tolerance       1e-20;
+        relTol          0.01;
+	//maxIter	         10;
+    }
+
+}
+
+SIMPLE
+{
+    nNonOrthogonalCorrectors 6;
+    rhoMin          0.1;
+    rhoMax          2.5;
+    pRefCell        0;
+    pRefValue       1e5;
+}
+
+PISO
+{
+    nCorrectors     2;
+    nNonOrthogonalCorrectors 2;
+	PhiRefCell 0;
+	PhiRefValue 0;
+}
+
+potentialFlow
+{
+    nNonOrthogonalCorrectors 10;
+    PhiRefCell 0;
+    PhiRefValue 0;
+    pRefCell 0;
+    pRefValue 1e5;
+}
+
+relaxationFactors
+{
+    fields
+    {
+        p               0.3;
+        rho             0.05;
+    }
+    equations
+    {
+        U                     0.5;
+        "(k|omega|epsilon|nuTilda|R|v2|f|kt|kl|e)"   0.3;
+        e                     0.5;
+    }
+}
+
+cache
+{
+    grad(U);
+}
+
+// ************************************************************************* //

@@ -1,0 +1,435 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+|*---------------------------------------------------------------------------*|
+|  File created by CFD support s.r.o., Mon Aug 17 06:22:42 2015               |
+|                    http://www.cdfsupport.com                                |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.3;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      turbulenceProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+//simulationType LES;
+simulationType RAS;
+
+RAS
+{
+//RASModel kOmegaSST;
+RASModel SpalartAllmaras;
+
+turbulence      on;
+
+printCoeffs     on;
+
+
+// Laminar model coefficients
+laminarCoeffs
+{
+}
+
+// Standard k-epsilon model coefficients
+kEpsilonCoeffs
+{
+    // Cmu
+    Cmu             0.09;
+    // C1
+    C1              1.44;
+    // C2
+    C2              1.92;
+    // alphaEps
+    alphaEps        0.76923;
+}
+
+// Realizable k-epsilon model coefficients
+realizableKECoeffs
+{
+    // Cmu
+    Cmu             0.09;
+    // A0
+    A0              4.04;
+    // C2
+    C2              1.9;
+    // alphak
+    alphak          1.0;
+    // alphaEps
+    alphaEps        0.833333;
+}
+
+// RNG k-epsilon model coefficients
+RNGkEpsilonCoeffs
+{
+    // Cmu
+    Cmu             0.0845;
+    // C1
+    C1              1.42;
+    // C2
+    C2              1.68;
+    // alphak
+    alphak          1.39;
+    // alphaEps
+    alphaEps        1.39;
+    // eta0
+    eta0            4.38;
+    // beta
+    beta            0.012;
+}
+
+// Shih non-Linear k-epsilon model coefficients
+NonlinearKEShihCoeffs
+{
+    // Cmu
+    Cmu             0.09;
+    // C1
+    C1              1.44;
+    // C2
+    C2              1.92;
+    // alphak
+    alphak          1;
+    // alphaEps
+    alphaEps        0.76932;
+    // A1
+    A1              1.25;
+    // A2
+    A2              1000;
+    // Ctau1
+    Ctau1           -4;
+    // Ctau2
+    Ctau2           13;
+    // Ctau3
+    Ctau3           -2;
+    // alphaKsi
+    alphaKsi        0.9;
+}
+
+// Lien non-Linear cubic k-epsilon model coefficients
+LienCubicKECoeffs
+{
+    // C1
+    C1              1.44;
+    // C2
+    C2              1.92;
+    // alphak
+    alphak          1;
+    // alphaEps
+    alphaEps        0.76923;
+    // A1
+    A1              1.25;
+    // A2
+    A2              1000;
+    // Ctau1
+    Ctau1           -4;
+    // Ctau2
+    Ctau2           13;
+    // Ctau3
+    Ctau3           -2;
+    // alphaKsi
+    alphaKsi        0.9;
+}
+
+// Gibson's q-zeta low Reynolds number k-epsilon model coefficients
+QZetaCoeffs
+{
+    // Cmu
+    Cmu             0.09;
+    // C1
+    C1              1.44;
+    // C2
+    C2              1.92;
+    // alphaZeta
+    alphaZeta       0.76923;
+    // anisotropic?
+    anisotropic     no;
+}
+
+// Launder-Sharma low Reynolds number k-epsilon model coefficients
+LaunderSharmaKECoeffs
+{
+    // Cmu
+    Cmu             0.09;
+    // C1
+    C1              1.44;
+    // C2
+    C2              1.92;
+    // alphaEps
+    alphaEps        0.76923;
+}
+
+// Lam-Bremhorst low Reynolds number k-Epsilon model coefficients
+LamBremhorstKECoeffs
+{
+    // Cmu
+    Cmu             0.09;
+    // C1
+    C1              1.44;
+    // C2
+    C2              1.92;
+    // alphaEps
+    alphaEps        0.76923;
+}
+
+// Lien-Leschziner low Reynolds number cubic k-epsilon model coefficients
+LienCubicKELowReCoeffs
+{
+    // Cmu
+    Cmu             0.09;
+    // C1
+    C1              1.44;
+    // C2
+    C2              1.92;
+    // alphak
+    alphak          1;
+    // alphaEps
+    alphaEps        0.76923;
+    // A1
+    A1              1.25;
+    // A2
+    A2              1000;
+    // Ctau1
+    Ctau1           -4;
+    // Ctau2
+    Ctau2           13;
+    // Ctau3
+    Ctau3           -2;
+    // alphaKsi
+    alphaKsi        0.9;
+    // Am
+    Am              0.016;
+    // Aepsilon
+    Aepsilon        0.263;
+    // Amu
+    Amu             0.00222;
+}
+
+// Lien-Leschziner low Reynolds number cubic k-epsilon model coefficients
+LienLeschzinerLowReCoeffs
+{
+    // Cmu
+    Cmu             0.09;
+    // C1
+    C1              1.44;
+    // C2
+    C2              1.92;
+    // alphak
+    alphak          1;
+    // alphaEps
+    alphaEps        0.76923;
+    // Am
+    Am              0.016;
+    // Aepsilon
+    Aepsilon        0.263;
+    // Amu
+    Amu             0.00222;
+}
+
+// Launder-Reece-Rodi RSTM with wall functions model coefficients
+LRRCoeffs
+{
+    // Cmu
+    Cmu             0.09;
+    // Clrr1
+    Clrr1           1.8;
+    // Clrr2
+    Clrr2           0.6;
+    // C1
+    C1              1.44;
+    // C2
+    C2              1.92;
+    // Cs
+    Cs              0.25;
+    // Ceps
+    Ceps            0.15;
+    // alphaEps
+    alphaEps        0.76923;
+}
+
+// Launder-Gibson RSTM with wall reflection and wall functions model coefficients
+LaunderGibsonRSTMCoeffs
+{
+    // Cmu
+    Cmu             0.09;
+    // Clg1
+    Clg1            1.8;
+    // Clg2
+    Clg2            0.6;
+    // C1
+    C1              1.44;
+    // C2
+    C2              1.92;
+    // C1Ref
+    C1Ref           0.5;
+    // C2Ref
+    C2Ref           0.3;
+    // Cs
+    Cs              0.25;
+    // Ceps
+    Ceps            0.15;
+    // alphaEps
+    alphaEps        0.76923;
+    // alphaR
+    alphaR          1.22;
+}
+
+// Standard Spalart-Allmaras model coefficients
+SpalartAllmarasCoeffs
+{
+    // alphaNut
+    alphaNut        1.5;
+    // Cb1
+    Cb1             0.1355;
+    // Cb2
+    Cb2             0.622;
+    // Cw2
+    Cw2             0.3;
+    // Cw3
+    Cw3             2;
+    // Cv1
+    Cv1             7.1;
+    Cv2             5.0;
+}
+
+// Wilcox's k-omega model coefficients
+WilcoxKOCoeffs
+{
+    alphaStarInf    1.0;
+    alphaInf        0.52;
+    alphaZero       0.11111;
+    betaStarInf     0.09;
+    betaI           0.072;
+    RBeta           8.0;
+    RK              6.0;
+    RO              2.95;
+    OneOnSigmaK     0.5;
+    OneOnSigmaO     0.5;
+    // Transitional?
+    Transitional    no;
+}
+
+// v2f model coefficients
+v2fCoeffs
+{
+    Cmu             0.22;
+    CmuKE           0.09;
+    Ceps10          1.40;
+    Ceps11          0.05;
+    Ceps2           1.90;
+    C1              1.40;
+    C2              0.30;
+    CL              0.23;
+    CEta            70.0;
+    oneOnSigmaK     1.0;
+    oneOnSigmaEps   0.76923;
+    yStarLim        30.0;
+}
+
+// Durbin's v2f model coefficients
+DurbinV2FCoeffs
+{
+    Cmu             0.22;
+    CmuKE           0.09;
+    Ceps10          1.40;
+    Ceps11          0.05;
+    Ceps2           1.90;
+    C1              1.40;
+    C2              0.30;
+    CL              0.23;
+    CEta            70.0;
+    oneOnSigmaK     1.0;
+    oneOnSigmaEps   0.76923;
+    yStarLim        30.0;
+}
+
+/*
+// Wall function coefficients
+wallFunctionCoeffs
+{
+    // kappa
+    kappa           0.4187;
+    // E
+    E               9;
+}
+*/
+}
+
+LES
+{
+LESModel SpalartAllmarasDDES;
+
+delta           cubeRootVol;
+
+turbulence      on;
+
+printCoeffs     on;
+
+cubeRootVolCoeffs
+{
+    deltaCoeff      1;
+}
+
+PrandtlCoeffs
+{
+    delta           cubeRootVol;
+    cubeRootVolCoeffs
+    {
+        deltaCoeff      1;
+    }
+
+    smoothCoeffs
+    {
+        delta           cubeRootVol;
+        cubeRootVolCoeffs
+        {
+            deltaCoeff      1;
+        }
+
+        maxDeltaRatio   1.1;
+    }
+
+    Cdelta          0.158;
+}
+
+vanDriestCoeffs
+{
+    delta           cubeRootVol;
+    cubeRootVolCoeffs
+    {
+        deltaCoeff      1;
+    }
+
+    smoothCoeffs
+    {
+        delta           cubeRootVol;
+        cubeRootVolCoeffs
+        {
+            deltaCoeff      1;
+        }
+
+        maxDeltaRatio   1.1;
+    }
+
+    Aplus           26;
+    Cdelta          0.158;
+}
+
+smoothCoeffs
+{
+    delta           cubeRootVol;
+    cubeRootVolCoeffs
+    {
+        deltaCoeff      1;
+    }
+
+    maxDeltaRatio   1.1;
+}
+
+}
+
+// ************************************************************************* //
